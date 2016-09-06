@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#1A1A1A"
+
+    tools:context="pma.vinko.legendtracker.ChampionDetails">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/championName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/title"
+            android:textColor="@color/yellow"/>
+
+        <TextView
+            android:id="@+id/championTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/subtitle"
+            android:textColor="@color/white"/>
+        <ImageView
+            android:id="@+id/championSplashArt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:id="@+id/txtSkill"
+            android:visibility="invisible"
+            android:text="Skills"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/yellow"
+            android:textSize="@dimen/subtitle"
+            android:layout_marginTop="30px"
+            android:layout_marginBottom="70px"
+            />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/passive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spellsPadding"
+                android:layout_marginRight="@dimen/spellsPadding"
+                />
+            <ImageView
+                android:id="@+id/spellQ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spellsPadding"
+                android:layout_marginRight="@dimen/spellsPadding"
+                />
+            <ImageView
+                android:id="@+id/spellW"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spellsPadding"
+                android:layout_marginRight="@dimen/spellsPadding"
+                />
+            <ImageView
+                android:id="@+id/spellE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spellsPadding"
+                android:layout_marginRight="@dimen/spellsPadding"
+                />
+            <ImageView
+                android:id="@+id/spellR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spellsPadding"
+                android:layout_marginRight="@dimen/spellsPadding"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtLore"
+            android:visibility="invisible"
+            android:text="Lore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/yellow"
+            android:textSize="@dimen/subtitle"
+            android:layout_marginTop="30px"
+            android:layout_marginBottom="70px"
+            />
+        <TextView
+            android:id="@+id/championLore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/txtStats"
+            android:text="Stats"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/yellow"
+            android:textSize="@dimen/subtitle"
+            android:layout_marginTop="100px"
+            android:layout_marginBottom="10px"
+            />
+
+        <LinearLayout
+
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10px">
+
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/txtAttack"
+                android:layout_width="250px"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Attack"
+                android:paddingRight="100px"
+                android:textSize="29px"/>
+            <TextView
+                android:id="@+id/attack"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:background="@drawable/redrectangle"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10px">
+
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/txtDefense"
+                android:layout_width="250px"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Defense"
+                android:paddingRight="100px"
+                android:textSize="29px"/>
+            <TextView
+                android:id="@+id/defense"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:background="@drawable/greenrectangle"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10px">
+
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/txtDifficulty"
+                android:layout_width="250px"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Difficulty"
+                android:paddingRight="100px"
+                android:textSize="29px"/>
+            <TextView
+                android:id="@+id/difficulty"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:background="@drawable/bluerectangle"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10px">
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/txtMagic"
+                android:layout_width="250px"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Magic"
+                android:paddingRight="100px"
+                android:textSize="29px"/>
+            <TextView
+                android:id="@+id/magic"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:background="@drawable/purplerectangle"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
