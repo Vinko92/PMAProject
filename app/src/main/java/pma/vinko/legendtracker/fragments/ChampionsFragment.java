@@ -1,7 +1,6 @@
 package pma.vinko.legendtracker.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -29,11 +28,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.concurrent.ExecutionException;
 
-import pma.vinko.legendtracker.ChampionDetails;
+import pma.vinko.legendtracker.activity.ChampionDetails;
 import pma.vinko.legendtracker.R;
-import pma.vinko.legendtracker.StaticDataActivity;
+import pma.vinko.legendtracker.activity.RuneDetailsActivity;
+import pma.vinko.legendtracker.asynctasks.GetData;
+import pma.vinko.legendtracker.asynctasks.PopulateTable;
+import pma.vinko.legendtracker.dal.UserReader;
+import pma.vinko.legendtracker.helpers.ViewBuilder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,16 +89,22 @@ public class ChampionsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        String url = "http://ddragon.leagueoflegends.com/cdn/6.17.1/data/en_US/champion.json";
-        new ChampionsOperation().execute(url);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_champions, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_champions, container, false);
+        String url = "http://ddragon.leagueoflegends.com/cdn/6.17.1/data/en_US/champion.json";
+
+        TableLayout tableLayout = (TableLayout) rootView.findViewById(R.id.championsTable);
+        UserReader reader = new UserReader(getActivity());
+        boolean isImageVisible = Boolean.parseBoolean(reader.getIsImageVisible());
+
+        new PopulateTable(getActivity(), rootView, tableLayout, ChampionDetails.class, "name;title",23, true, "champion").execute(url);
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -109,143 +120,6 @@ public class ChampionsFragment extends Fragment {
         mListener = null;
     }
 
-
-    private class ChampionsOperation extends AsyncTask<String, Void, Void> {
-
-        final HttpClient client = new DefaultHttpClient();
-        ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        String data, content;
-
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-            progressDialog.setTitle("Please wait...");
-            progressDialog.show();
-        }
-
-
-        @Override
-        protected Void doInBackground(String... params) {
-            InputStream inputStream = null;
-            String result = "";
-
-            try{
-                HttpResponse httpResponse = client.execute(new HttpGet(params[0]));
-
-                inputStream = httpResponse.getEntity().getContent();
-
-                if(inputStream != null){
-                    content = readStream(inputStream);
-                }
-                else{
-                    content = "Oops, something went wrong";
-                }
-
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @NonNull
-        private String readStream(InputStream stream) throws IOException {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-            String line = "";
-            StringBuilder result = new StringBuilder();
-
-            while((line = reader.readLine()) != null){
-                result.append(line);
-            }
-
-            stream.close();
-            return  result.toString();
-        }
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-
-            progressDialog.dismiss();
-
-            try {
-                JSONObject json = new JSONObject(content).getJSONObject("data");
-                StringBuilder champions = new StringBuilder();
-                Iterator<String> keys = json.keys();
-                TableLayout tl = (TableLayout) getView().findViewById(R.id.championsTable);
-
-                while (keys.hasNext()) {
-                    //get champ details
-                    final JSONObject jsonChampion = json.getJSONObject(keys.next());
-                    //instantiate table row
-                    TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-                    TableRow tr = new TableRow(getActivity());
-                    tr.setLayoutParams(lp);
-
-                    //add champ details
-                    tr.addView(getTextView(jsonChampion, "name","title"));
-
-                    Button button = new Button(getActivity());
-
-                    button.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-                    button.setTextColor(Color.YELLOW);
-                    button.setText("test");
-
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            try {
-                                Intent intent = new Intent(getActivity(), ChampionDetails.class);
-                                Bundle b = new Bundle();
-                                b.putString("championId", jsonChampion.getString("id"));
-                                intent.putExtras(b);
-                                startActivity(intent);
-                                getActivity().finish();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-                    });
-                    tr.addView(button);
-                    tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-
-        }
-
-        private View getTextView(JSONObject json, String... propertyNames) throws JSONException {
-
-            StringBuilder text = new StringBuilder();
-
-            for(int i = 0; i < propertyNames.length; i++) {
-                text.append(json.getString(propertyNames[i]));
-
-                if(i < propertyNames.length - 1 )
-                    text.append(" ");
-
-            }
-
-            return createTextView(text.toString());
-        }
-
-        private View createTextView(String text) {
-
-            TextView textView = new TextView(getActivity());
-
-            textView.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-            textView.setTextColor(Color.YELLOW);
-            textView.setText(text);
-
-            return textView;
-        }
-    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

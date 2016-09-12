@@ -1,0 +1,90 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pma.vinko.legendtracker.fragments.SelfFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+    android:id="@+id/playerNameDetails"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+     />
+    <TextView
+        android:id="@+id/league"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         />
+    <TextView
+        android:id="@+id/division"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         />
+    <TextView
+        android:id="@+id/points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:id="@+id/wins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/losses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="Champion stats"
+        android:textStyle="italic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableLayout
+            android:id="@+id/champsStatsTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp">
+            <TableRow>
+                <TextView
+                    android:padding="6dp"
+                android:text="Champion name"/>
+                <TextView
+                    android:padding="6dp"
+                    android:text="Wins"/>
+                <TextView
+                    android:padding="6dp"
+                    android:text="Losses"/>
+                <TextView
+                    android:padding="6dp"
+                    android:text="Kills"/>
+                <TextView
+                    android:padding="6dp"
+                    android:text="Detahs"/>
+                <TextView
+                    android:padding="6dp"
+                    android:text="Asists"/>
+
+            </TableRow>
+
+
+        </TableLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+</LinearLayout>

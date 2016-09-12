@@ -10,24 +10,37 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.ChampionDetails" />
+        <activity
+            android:name=".activity.StaticDataActivity"
+            android:label="@string/title_activity_static_data"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
+        <activity android:name=".activity.LiveGamesActivity" />
+        <activity android:name=".activity.ItemDetailsActivity" />
+        <activity android:name=".activity.RuneDetailsActivity" />
+        <activity
+            android:name=".activity.PlayersActivity"
+            android:label="@string/title_activity_players"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.SpellDetailsActivity" />
+        <activity android:name=".activity.ProgressBarActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChampionDetails" />
-        <activity
-            android:name=".StaticDataActivity"
-            android:label="@string/title_activity_static_data"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="pma.vinko.legendtracker.MainActivity" />
-        </activity>
-        <activity android:name=".activity.LiveGamesActivity"></activity>
+        <activity android:name=".activity.Settings"></activity>
     </application>
 
 </manifest>

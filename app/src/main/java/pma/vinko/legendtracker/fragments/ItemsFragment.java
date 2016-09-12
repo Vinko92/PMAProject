@@ -1,14 +1,29 @@
 package pma.vinko.legendtracker.fragments;
 
-import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.concurrent.ExecutionException;
 
 import pma.vinko.legendtracker.R;
+import pma.vinko.legendtracker.activity.ItemDetailsActivity;
+import pma.vinko.legendtracker.activity.RuneDetailsActivity;
+import pma.vinko.legendtracker.asynctasks.GetData;
+import pma.vinko.legendtracker.asynctasks.GetImage;
+import pma.vinko.legendtracker.asynctasks.PopulateSelf;
+import pma.vinko.legendtracker.asynctasks.PopulateTable;
+import pma.vinko.legendtracker.helpers.ViewBuilder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,16 +74,22 @@ public class ItemsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        String url = "https://global.api.pvp.net/api/lol/static-data/eune/v1.2/item?api_key=RGAPI-CBA5D9B2-7ED7-42FB-A7F0-D312B30965EA";
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_items, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_items, container, false);
+        TableLayout tl = (TableLayout) rootView.findViewById(R.id.itemsTable);
+
+        HashMap<String,String> names = new HashMap<String,String>();
+        HashMap<String,String> images = new HashMap<String,String>();
+        String url = "https://global.api.pvp.net/api/lol/static-data/eune/v1.2/item?itemListData=image&api_key=RGAPI-CBA5D9B2-7ED7-42FB-A7F0-D312B30965EA";
+
+        new PopulateTable(getActivity(), rootView, tl, ItemDetailsActivity.class, "name",23,true,"item").execute(url);
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -78,7 +99,7 @@ public class ItemsFragment extends Fragment {
         }
     }
 
-    @Override
+   /* @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
@@ -88,7 +109,7 @@ public class ItemsFragment extends Fragment {
                     + " must implement OnFragmentInteractionListener");
         }
     }
-
+*/
     @Override
     public void onDetach() {
         super.onDetach();

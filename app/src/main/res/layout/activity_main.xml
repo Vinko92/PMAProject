@@ -8,61 +8,77 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@color/black"
-    tools:context="pma.vinko.legendtracker.MainActivity">
+    android:background="@color/white"
+    tools:context=".activity.MainActivity">
 
     <LinearLayout
         android:orientation="vertical"
-        android:paddingTop="300px"
+        android:paddingTop="100px"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
             android:text="Legend Tracker"
             android:textAlignment="center"
+            android:layout_marginTop="50px"
             android:layout_marginBottom="100px"
-            android:textColor="#ffff00"
+            android:textColor="#58857e"
             android:textSize="90px"
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+
         <Button
             android:id="@+id/btnLiveGames"
-            android:textAlignment="center"
-            android:layout_marginLeft="250px"
-            android:text="Live games"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content" />
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/mybutton"
+            android:text="Live games" />
         <Button
-            android:textAlignment="center"
-            android:layout_marginLeft="250px"
-            android:text="Players"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content" />
-
+            android:id="@+id/btnPlayers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/mybutton"
+            android:text="Players" />
         <Button
             android:id="@+id/data"
-            android:textAlignment="center"
-            android:layout_marginLeft="250px"
-            android:text="LoL Data"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content" />
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/mybutton"
+            android:text="LoL data" />
         <Button
-            android:textAlignment="center"
-            android:layout_marginLeft="250px"
-            android:text="Settings"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content" />
-
+            android:id="@+id/btnSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/mybutton"
+            android:text="Settings" />
         <Button
-            android:textAlignment="center"
-            android:layout_marginLeft="250px"
-            android:text="Quit"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content" />
+            android:id="@+id/btnQuit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/mybutton"
+            android:text="Quit" />
     </LinearLayout>
 
 

@@ -1,5 +1,7 @@
 package pma.vinko.legendtracker.asynctasks;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
@@ -22,12 +24,23 @@ import pma.vinko.legendtracker.helpers.StreamHelper;
 public class GetData extends AsyncTask<String, Void, String> {
 
     final HttpClient client = new DefaultHttpClient();
+    private Context context;
+    ProgressDialog progressDialog;
     String content;
+
+    public GetData(){
+
+    }
+
+    public GetData(Context context){
+        this.context = context;
+    }
 
     @Override
     protected void onPreExecute(){
         super.onPreExecute();
-
+       /* progressDialog = new ProgressDialog(context);
+        progressDialog.show();*/
     }
 
 
@@ -54,6 +67,12 @@ public class GetData extends AsyncTask<String, Void, String> {
         }
 
         return content;
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+
+       // progressDialog.dismiss();
     }
 
     @NonNull

@@ -1,10 +1,9 @@
-package pma.vinko.legendtracker;
+package pma.vinko.legendtracker.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,9 +12,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
@@ -31,6 +27,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import pma.vinko.legendtracker.R;
 
 public class ChampionDetails extends AppCompatActivity {
 
@@ -78,7 +76,7 @@ public class ChampionDetails extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         if(bundle != null){
-            championId = bundle.get("championId").toString();
+            championId = bundle.get("id").toString();
         }
 
         return championId;
@@ -165,12 +163,9 @@ public class ChampionDetails extends AppCompatActivity {
             }
 
         }
-
         private void populateText(JSONObject json) throws JSONException {
-
             json = json.getJSONObject("data");
             JSONObject champDetails = json.getJSONObject(json.keys().next());
-
 
             TextView championName = (TextView) findViewById(R.id.championName);
             TextView championLore = (TextView) findViewById(R.id.championLore);
